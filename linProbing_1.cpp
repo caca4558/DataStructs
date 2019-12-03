@@ -24,17 +24,23 @@ unsigned int HashTable::hashFunction(int key)
     return (key % tableSize);
 }
 
-void HashTable::deleteItem(int key){
-  int index = hashFunction(key);
-  node* temp = table[index];
-  delete(temp);
-}
-
 node* HashTable::searchItem(int key)
 {
-    for(int i = 0; i < table.size(); i++){
-      if(table[i]->key == key){
-        return table[i];
+    int count = 0;
+    int index = hashFunction(key);
+    while(count < table.size()){
+      if(table[index]->key == key){
+        return table[index];
+      }
+      else{
+        if(index == table.size()){
+          index = 0;
+          count++;
+        }
+        else{
+          index++;
+          count++;
+        }
       }
     }
     return NULL;
@@ -47,9 +53,9 @@ bool HashTable::insertItem(int key)
     if(table[index] == NULL){
       table[index] = createNode(key);
     }
-    if(searchItem(key) != NULL){
-      return false;
-    }
+    // if(searchItem(key) != NULL){
+    //   return false;
+    // }
     else{
       bool check = false;
       while(check == false){
@@ -70,5 +76,23 @@ bool HashTable::insertItem(int key)
 }
 
 void HashTable::deleteItem(int key){
-
+  node* temp;
+  int index = hashFunction(key);
+  while(true){
+    if(table[index]->key == key){
+      temp = table[index];
+      table[index]->key = NULL;
+      delete temp;
+      break;
+    }
+    else{
+      if(index == table.size){
+        index = 0;
+      }
+      else{
+        index++;
+      }
+    }
+  }
 }
+
