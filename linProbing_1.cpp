@@ -32,20 +32,43 @@ void HashTable::deleteItem(int key){
 
 node* HashTable::searchItem(int key)
 {
-    int index = hashFunction(key);
-    return table[index];
+    for(int i = 0; i < table.size(); i++){
+      if(table[i]->key == key){
+        return table[i];
+      }
+    }
+    return NULL;
 }
 
 bool HashTable::insertItem(int key)
 {
-    if(!searchItem(key))
-    {
-        int index = hashFunction(key);
-        table[index] = createNode(key,table[index]);
-        return true;
-     }
-    else{
-        cout<<"duplicate entry: "<<key<<endl;
-        return false;
+    int index = hashFunction(key);
+    node* checker = table[index];
+    if(table[index] == NULL){
+      table[index] = createNode(key);
     }
+    if(searchItem(key) != NULL){
+      return false;
+    }
+    else{
+      bool check = false;
+      while(check == false){
+        if(table[index] == NULL){
+          table[index] = createNode(key);
+          break;
+        }
+        else{
+          if(index == table.size()){
+            index = 0;
+          }
+          else{
+            index++;
+          }
+        }
+      }
+    }
+}
+
+void HashTable::deleteItem(int key){
+
 }
