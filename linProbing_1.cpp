@@ -81,7 +81,7 @@ void HashTable::deleteItem(int key){
   while(true){
     if(table[index]->key == key){
       temp = table[index];
-      table[index]->key = NULL;
+      table[index] = NULL;
       delete temp;
       break;
     }
