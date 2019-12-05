@@ -4,7 +4,7 @@
 using namespace std;
 
 
-node* BST::getMinValueNode(node* currNode){
+node* getMinValueNode(node* currNode){
 
     if(currNode->left == NULL){
       return currNode;
@@ -13,7 +13,7 @@ node* BST::getMinValueNode(node* currNode){
 }
 
 
-void deleteItemHelper(node* currNode, int key){
+node* deleteItemHelper(node* currNode, int key){
   if(currNode == NULL)
   {
     return NULL;
@@ -51,8 +51,8 @@ void deleteItemHelper(node* currNode, int key){
     {
       ///Replace with Minimum from right subtree
       node* temp = getMinValueNode(currNode->right);
-      root->key = temp->key;
-      root->right = deleteNode(currNode->right, temp->key);
+      currNode->key = temp->key;
+      currNode->right = deleteItemHelper(currNode->right, temp->key);
     }
   }
 }
@@ -63,13 +63,13 @@ node* searchHelper(node* currNode, int key){
       return currNode;
     }
     searchHelper(currNode->left, key);
-    searchHelper(currnode->right, key);
+    searchHelper(currNode->right, key);
   }
 }
 
 node* createNode(int key){
-  node* newNode = new Node;
-  newNode->key = data;
+  node* newNode = new node;
+  newNode->key = key;
   newNode->left = NULL;
   newNode->right = NULL;
   return newNode;
@@ -88,14 +88,14 @@ node* insertHelper(node* currNode, int key){
   return currNode;
 }
 
-HashTable(int bsize){
+HashTable::HashTable(int bsize){
   this->tableSize = bsize;
   table = new node*[tableSize];
   for(int i=0;i<bsize;i++)
       table[i] = nullptr;
 }
 
-~hashTable(){
+HashTable::~HashTable(){
 
 }
 
