@@ -3,7 +3,7 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
-#include "Chaining.hpp"
+#include "bst.hpp"
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -13,12 +13,8 @@ int main(int argc, char* argv[])
     string choice;
     vector <int> numbers;
     HashTable ht(10009);
-    /*cout<< "Contents of the hash table are"<<endl;
-    ht.printTable();
-
-    cout<<endl;*/
-    ifstream table (fileName);
-    while (getline(table, temp)){
+    ifstream inFile(fileName);
+    while (getline(inFile, temp)){
       istringstream iss(temp);
       string t;
       while(getline(iss, t, ','))
@@ -92,4 +88,3 @@ int main(int argc, char* argv[])
     }
     return 0;
 }
-
