@@ -1,5 +1,5 @@
-#ifndef HASH_HPP
-#define HASH_HPP
+#ifndef BST_HPP
+#define BST_HPP
 
 #include <string>
 
@@ -19,10 +19,10 @@ class HashTable
     node* createNode(int key);
 public:
     HashTable(int bsize);
-    ~hashDestructor();
+    ~HashTable();
     unsigned int hashFunction(int key);
     node* searchItem(int key);
-    bool insertItem(int key);
+    void insertItem(int key);
     void deleteItem(int key);
 };
 

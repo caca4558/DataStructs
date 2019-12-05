@@ -1,6 +1,9 @@
 #include<iostream>
 #include <ctime>
-#include "hash.hpp"
+#include <vector>
+#include <fstream>
+#include <sstream>
+#include "bst.hpp"
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -10,20 +13,17 @@ int main(int argc, char* argv[])
     string choice;
     vector <int> numbers;
     HashTable ht(10009);
-    /*cout<< "Contents of the hash table are"<<endl;
-    ht.printTable();
-
-    cout<<endl;*/
-    ifstream table (fileName);
-    while (getline(table, temp)){
+    ifstream inFile(fileName);
+    while (getline(inFile, temp)){
       istringstream iss(temp);
       string t;
       while(getline(iss, t, ','))
       {
-        numbers.pushback(stoi(t));
+        numbers.push_back(stoi(t));
       }
     }
-    while(true)
+    bool check = true;
+    while(check)
     {
       int sum = 0;
       cout << "Please choose which operation to implement:" << endl;
@@ -79,8 +79,9 @@ int main(int argc, char* argv[])
           }
           cout << sum/100 << endl;
           break;
-        case 4
-          return false;
+        case 4:
+          check = false;
+          break;
         default:
           cout << "Not a valid choice" << endl;
       }
