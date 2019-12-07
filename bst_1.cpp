@@ -65,6 +65,7 @@ node* searchHelper(node* currNode, int key){
     searchHelper(currNode->left, key);
     searchHelper(currNode->right, key);
   }
+  return NULL;
 }
 
 node* createNode(int key){
@@ -108,13 +109,21 @@ node* HashTable::searchItem(int key){
   node* giveBack = searchHelper(table[index], key);
   return giveBack;
 }
-void HashTable::insertItem(int key){
-  int index = hashFunction(key);
-  node* root = table[index];
-  table[index] = insertHelper(root, key);
+bool HashTable::insertItem(int key){
+  if(searchItem(key) == NULL){
+    int index = hashFunction(key);
+    node* root = table[index];
+    table[index] = insertHelper(root, key);
+    return true;
+  }
+  else{
+    return false;
+  }
+
 }
 
 void HashTable::deleteItem(int key){
   int index = hashFunction(key);
   deleteItemHelper(table[index], key);
 }
+
