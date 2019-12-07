@@ -4,9 +4,9 @@
 #include <fstream>
 #include <sstream>
 #include <cmath>
-/*#include "Chaining.hpp"
-#include "bst.hpp"*/
-#include "linProbing.hpp"
+#include "Chaining.hpp"
+//#include "bst.hpp"*/
+//#include "linProbing.hpp"
 using namespace std;
 
 float stdCalc(vector<int> nums)
@@ -56,115 +56,44 @@ int main(int argc, char* argv[])
     float lptestmean;
     float lpteststd;
     ifstream table (fileName);
-    cout << "Please choose the collision resolution method:" << endl;
-    cout << "1. Chaining with a linked list" << endl;
-    cout << "2. Chaining with a BST" << endl;
-    cout << "3. Linear Probing" << endl;
-    cout << "4. Cuckoo Hashing" << endl;
-    getline(cin,type);
-    switch(stoi(type))
-    {
-      case 1:
-        //HashTable ht(10009);
-        /*cout<< "Contents of the hash table are"<<endl;
-        ht.printTable();
-        cout<<endl;*/
-        while (getline(table, temp)){
-          istringstream iss(temp);
-          string t;
-          while(getline(iss, t, ','))
-          {
-            numbers.push_back(stoi(t));
-          }
-        }
-        /*int index=0;
-        while(llcount/10009 < 0.1)
-        {
-          ht.insertItem()
-        }*/
-        cout << "Load Factor: " << llcount/10009 << endl;
-        cout << "Delete- mean: " << " standard dev: " << endl;
-        cout << "Insert- mean: " << " standard dev: " << endl;
-        cout << "Search- mean: " << " standard dev: " << endl;
-        break;
-      case 2:
-        //HashTable ht(10009);
-        /*cout<< "Contents of the hash table are"<<endl;
-        ht.printTable();
-        cout<<endl;*/
-        while (getline(table, temp)){
-          istringstream iss(temp);
-          string t1;
-          while(getline(iss, t1, ','))
-          {
-            numbers.push_back(stoi(t1));
-          }
-        }
-        cout << "Load Factor: " << bstcount/10009 << endl;
-        cout << "Delete- mean: " << " standard dev: " << endl;
-        cout << "Insert- mean: " << " standard dev: " << endl;
-        cout << "Search- mean: " << " standard dev: " << endl;
-        break;
-      case 3:
-        /*cout<< "Contents of the hash table are"<<endl;
-        ht.printTable();
-        cout<<endl;*/
-        while (getline(table, temp)){
-          istringstream iss(temp);
-          string t2;
-          while(getline(iss, t2, ','))
-          {
-            numbers.push_back(stoi(t2));
-          }
-        }
-        index=0;
-        while(lpcount/10009 < 0.1)
-        {
-            ht.insertItem(numbers[index]);
-            index++;
-            lpcount++;
-        }
-        cout << "point 1" << endl;
-        for(int i = 0; i < 100; i++)
-        {
-          int startTime, endTime;
-          double execTime;
-          int randNum = rand() % (int)lpcount;
-          startTime = clock();
-          ht.deleteItem(numbers[randNum]);
-          endTime = clock();
-          execTime = (double)(endTime-startTime)/CLOCKS_PER_SEC;
-          nums.push_back(execTime);
-        }
-        cout << "point 2" << endl;
-        lptestmean = meanCalc(nums);
-        lpteststd = stdCalc(nums);
-        cout << "Load Factor: " << lpcount/10009 << endl;
-        cout << "Delete- mean: " << lptestmean << " standard dev: " << lpteststd << endl;
-        cout << "Insert- mean: " << " standard dev: " << endl;
-        cout << "Search- mean: " << " standard dev: " << endl;
-        break;
-      case 4:
-        //HashTable ht(10009);
-        /*cout<< "Contents of the hash table are"<<endl;
-        ht.printTable();
-        cout<<endl;*/
-        while (getline(table, temp)){
-          istringstream iss(temp);
-          string t3;
-          while(getline(iss, t3, ','))
-          {
-            numbers.push_back(stoi(t3));
-          }
-        }
-
-        cout << "Load Factor: " << coocount/10009 << endl;
-        cout << "Delete- mean: " << " standard dev: " << endl;
-        cout << "Insert- mean: " << " standard dev: " << endl;
-        cout << "Search- mean: " << " standard dev: " << endl;
-        break;
-      default:
-        cout << "Not Valid" << endl;
+    while (getline(table, temp)){
+      istringstream iss(temp);
+      string t2;
+      while(getline(iss, t2, ','))
+      {
+        numbers.push_back(stoi(t2));
+      }
     }
+    index=0;
+    while(lpcount/10009 < 0.1)
+    {
+        ht.insertItem(numbers[index]);
+        index++;
+        lpcount++;
+    }
+    cout << lpcount << endl;
+    cout << ht.searchItem(22141995)->key << endl;
+    int i = 0;
+    while(i < 100)
+    {
+      double startTime, endTime;
+      double execTime;
+      startTime = clock();
+      int randNum = rand() % (int)lpcount;
+      cout << randNum << endl;
+      ht.deleteItem(numbers[randNum]);
+      endTime = clock();
+      execTime = (double)(endTime-startTime)/CLOCKS_PER_SEC;
+      cout << "execution time: " << execTime << endl;
+      cout << i << endl;
+      i++;
+    }
+
+    lptestmean = meanCalc(nums);
+    lpteststd = stdCalc(nums);
+    cout << "Load Factor: " << lpcount/10009 << endl;
+    cout << "Delete- mean: " << lptestmean << " standard dev: " << lpteststd << endl;
+    cout << "Insert- mean: " << " standard dev: " << endl;
+    cout << "Search- mean: " << " standard dev: " << endl;
     return 0;
 }
