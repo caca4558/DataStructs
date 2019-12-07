@@ -9,7 +9,7 @@
 //#include "linProbing.hpp"
 using namespace std;
 
-float stdCalc(vector<int> nums)
+float stdCalc(vector<float> nums)
 {
   float sum = 0.0;
   float mean;
@@ -25,7 +25,7 @@ float stdCalc(vector<int> nums)
   return sqrt(standardDeviation / nums.size());
 }
 
-float meanCalc(vector<int> nums)
+float meanCalc(vector<float> nums)
 {
   float sum = 0.0;
   float mean;
@@ -52,9 +52,6 @@ int main(int argc, char* argv[])
     float lpcount = 0;
     int index;
     HashTable ht(10009);
-    vector<int> nums;
-    float lptestmean;
-    float lpteststd;
     ifstream table (fileName);
     while (getline(table, temp)){
       istringstream iss(temp);
@@ -65,35 +62,59 @@ int main(int argc, char* argv[])
       }
     }
     index=0;
-    while(lpcount/10009 < 0.1)
+    while(llcount/10009 < 0.1)
     {
-        ht.insertItem(numbers[index]);
+        if(ht.insertItem(numbers[index]) == true)
+        {
+          llcount++;
+        }
         index++;
-        lpcount++;
     }
-    cout << lpcount << endl;
-    cout << ht.searchItem(22141995)->key << endl;
+    cout << "idk";
+    float startTime, endTime;
+    float execTimedel;
     int i = 0;
+    startTime = clock();
     while(i < 100)
     {
-      double startTime, endTime;
-      double execTime;
-      startTime = clock();
-      int randNum = rand() % (int)lpcount;
-      cout << randNum << endl;
+      int randNum = rand() % (int)llcount;
       ht.deleteItem(numbers[randNum]);
-      endTime = clock();
-      execTime = (double)(endTime-startTime)/CLOCKS_PER_SEC;
-      cout << "execution time: " << execTime << endl;
-      cout << i << endl;
       i++;
     }
-
-    lptestmean = meanCalc(nums);
-    lpteststd = stdCalc(nums);
-    cout << "Load Factor: " << lpcount/10009 << endl;
-    cout << "Delete- mean: " << lptestmean << " standard dev: " << lpteststd << endl;
-    cout << "Insert- mean: " << " standard dev: " << endl;
-    cout << "Search- mean: " << " standard dev: " << endl;
+    endTime = clock();
+    execTimedel = (endTime-startTime)/CLOCKS_PER_SEC;
+    cout << "lol" << endl;
+    float startTime1, endTime1;
+    float execTimesearch;
+    i = 0;
+    startTime1 = clock();
+    while(i < 100)
+    {
+      int randNum = rand() % (int)llcount;
+      ht.searchItem(numbers[randNum]);
+      i++;
+    }
+    endTime1 = clock();
+    execTimesearch = (endTime1-startTime1)/CLOCKS_PER_SEC;
+    cout << "lol1" << endl;
+    float startTime2, endTime2;
+    float execTimeinsert;
+    i = 0;
+    startTime2 = clock();
+    while(i < 100)
+    {
+      if(ht.insertItem(numbers[index]) == true)
+      {
+        llcount++;
+      }
+      index++;
+      i++;
+    }
+    endTime2 = clock();
+    execTimeinsert = (endTime2-startTime2)/CLOCKS_PER_SEC;
+    cout << "Load Factor: " << llcount/10009 << endl;
+    cout << "Delete- mean: " << execTimedel/100.000 << endl;
+    cout << "Search- mean: " << execTimesearch/100.000 << endl;
+    cout << "Insert- mean: " << execTimeinsert/100.000 << endl;
     return 0;
 }
