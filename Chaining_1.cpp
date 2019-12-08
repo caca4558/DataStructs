@@ -1,6 +1,6 @@
 // CPP program to implement hashing with chaining
 #include<iostream>
-#include "hash.hpp"
+#include "Chaining.hpp"
 
 
 using namespace std;
@@ -92,3 +92,4 @@ void HashTable::printTable()
         cout << "]" << endl;
     }
  }
+
