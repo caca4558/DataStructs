@@ -96,9 +96,6 @@ HashTable::HashTable(int bsize){
       table[i] = nullptr;
 }
 
-HashTable::~HashTable(){
-
-}
 
 unsigned int HashTable::hashFunction(int key){
   return (key % tableSize);
@@ -126,4 +123,3 @@ void HashTable::deleteItem(int key){
   int index = hashFunction(key);
   deleteItemHelper(table[index], key);
 }
-
