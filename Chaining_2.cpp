@@ -1,6 +1,7 @@
 // CPP program to implement hashing with chaining
 #include<iostream>
-#include "hash.hpp"
+#include<cmath>
+#include "Chaining.hpp"
 
 
 using namespace std;
@@ -21,9 +22,9 @@ HashTable::HashTable(int bsize)
         table[i] = nullptr;
 }
 
-unsigned int HashTable::hashFunction(int key)
-{
-    return (floor(key/tableSize)%tableSize);
+unsigned int HashTable::hashFunction(int key){
+    unsigned int val = floor(key/tableSize);
+    return (val%tableSize);
 }
 
 void HashTable::deleteItem(int key){
@@ -91,3 +92,4 @@ void HashTable::printTable()
         cout << "]" << endl;
     }
  }
+
