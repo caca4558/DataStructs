@@ -19,9 +19,7 @@ HashTable::HashTable(int bsize)
         table[i] = nullptr;
 }
 
-HashTable::~HashTable(){
 
-}
 
 unsigned int HashTable::hashFunction(int key)
 {
