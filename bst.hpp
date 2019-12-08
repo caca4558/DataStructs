@@ -19,10 +19,9 @@ class HashTable
     node* createNode(int key);
 public:
     HashTable(int bsize);
-    ~HashTable();
     unsigned int hashFunction(int key);
     node* searchItem(int key);
-    void insertItem(int key);
+    bool insertItem(int key);
     void deleteItem(int key);
 };
 
